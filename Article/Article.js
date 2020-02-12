@@ -85,6 +85,20 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Coding is Cool',
+    date: 'Feb 10th, 2020',
+    firstParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vehicula aliquam justo, et efficitur leo ultricies in. Nam vel sollicitudin ex, vitae maximus turpis. Morbi sapien tellus, imperdiet eu nunc non, tempor rhoncus nulla. Nulla finibus tincidunt orci, id ultricies nunc suscipit quis. Aliquam sagittis sed neque ac efficitur. Donec condimentum lacinia erat, sed bibendum tellus bibendum at. Ut et ex magna. Vivamus ipsum orci, tincidunt sit amet ultricies non, lacinia nec lectus.',
+    secondParagraph: 'In non massa lectus. Duis semper, justo sit amet vulputate blandit, lectus leo rutrum risus, id aliquet felis lacus id ante. Donec iaculis vulputate sollicitudin. Nullam mauris dui, congue at egestas quis, dapibus quis neque. Proin in dapibus eros. Mauris cursus magna nec augue placerat varius. Duis sed lectus elit. Aliquam nec nunc semper, ultricies sapien vitae, tempor ipsum.',
+    thirdParagraph: 'Duis dictum velit quis quam maximus sodales. Nam rutrum ligula leo, sit amet auctor risus porttitor vel. Maecenas in quam at erat sagittis congue a consectetur magna. Maecenas tincidunt erat tellus. Phasellus diam mi, porttitor eu erat id, mollis pellentesque lectus. Nam consectetur pulvinar quam, at sodales nibh sodales aliquet. Cras tempor mattis leo. Praesent sed pellentesque velit. Aliquam nec neque at turpis tempor rhoncus. Vivamus erat eros, ultrices nec venenatis sit amet, vestibulum at tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed at nulla velit.'
+  },
+  {
+    title: 'Zombies',
+    date: 'Feb 11th, 2020',
+    firstParagraph: 'Cum horribilem resurgere de sepulcris creaturis, sicut de iride et serpens. Pestilentia, ipsa screams. Pestilentia est haec ambulabat mortuos. Sicut malus voodoo. Aenean a dolor vulnerum aperire accedunt, mortui iam vivam. Qui tardius moveri, sed in magna copia sint terribiles legionis. Alii missing oculis aliorum sicut serpere crabs nostram. Putridi odores aere implent.',
+    secondParagraph: 'Tremor est vivos magna. Expansis ulnis video missing carnem armis caeruleum in locis. A morbo amarus in auras. Nihil horum sagittis tincidunt, gelida portenta. The unleashed virus est, et iam mortui ambulabunt super terram. Souless mortuum oculos attonitos back zombies. An hoc incipere Clairvius Narcisse, an ante? Is bello mundi z.',
+    thirdParagraph: 'Zombies reversus ab inferno, nam malum cerebro. De carne animata corpora quaeritis. Summus sit​​, morbo vel maleficia? De Apocalypsi undead dictum mauris. Hi mortuis soulless creaturas, imo monstra adventus vultus comedat cerebella viventium. Qui offenderit rapto, terribilem incessu. The voodoo sacerdos suscitat mortuos comedere carnem.'
   }
 ];
 
@@ -129,16 +143,20 @@ function articleMaker(obj) {
   p2.textContent = obj.secondParagraph;
   const p3 = document.createElement('p');
   p3.textContent = obj.thirdParagraph;
-  const button = document.createElement('span');
-  button.classList.add('expandButton');
-  button.textContent = 'expand';
-  wrapper.append(title, date, p1, p2, p3, button);
+  const expandButton = document.createElement('span');
+  expandButton.classList.add('expandButton');
+  expandButton.textContent = '\u25bc';
+  expandButton.addEventListener('click', (event) => {
+    wrapper.classList.toggle('article-open');
+    expandButton.textContent = '\u25b2';
+  });
+  wrapper.append(title, date, p1, p2, p3, expandButton);
 
   return wrapper;
 }
 
 const container = document.querySelector('.articles');
 
-data.forEach(data => {
+data.map(data => {
   container.append(articleMaker(data));
 });
