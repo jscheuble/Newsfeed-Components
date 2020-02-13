@@ -148,9 +148,15 @@ function articleMaker(obj) {
   expandButton.textContent = '\u25bc';
   expandButton.addEventListener('click', (event) => {
     wrapper.classList.toggle('article-open');
-    expandButton.textContent = '\u25b2';
+    expandButton.style.transform = 'rotate(0.5turn)';
   });
-  wrapper.append(title, date, p1, p2, p3, expandButton);
+  const closeButton = document.createElement('button');
+  closeButton.textContent = 'collapse';
+  closeButton.style.color = 'red';
+  wrapper.append(title, date, p1, p2, p3, expandButton, closeButton);
+  closeButton.addEventListener('click', () => {
+    wrapper.classList.toggle('article-open');
+  });
 
   return wrapper;
 }
